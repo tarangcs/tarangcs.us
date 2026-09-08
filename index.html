@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarang Consulting Services</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔷</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0c1d36;
+            --blue: #1a3a5c;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --nav-bg: #3b82f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 16px 0;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--nav-bg) 55%, #2563eb 100%);
+            box-shadow: 0 2px 12px rgba(12,29,54,0.15);
+        }
+
+        nav.scrolled {
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--nav-bg) 55%, #2563eb 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 12px 0;
+            box-shadow: 0 4px 20px rgba(12,29,54,0.25);
+        }
+
+        nav .wrap {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            height: 96px;
+            transition: height 0.3s;
+        }
+
+        nav.scrolled .logo {
+            height: 64px;
+        }
+
+        nav .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        nav ul { list-style: none; display: flex; gap: 32px; }
+
+        nav a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover { color: #ffffff; }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background:
+                radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px) 0 0/30px 30px,
+                linear-gradient(160deg, #0c1d36 0%, #162d50 40%, #1a3a5c 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 18px 7px 14px;
+            background: rgba(59,130,246,0.15);
+            border: 1px solid rgba(59,130,246,0.25);
+            border-radius: 100px;
+            color: var(--accent-light);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            margin-bottom: 28px;
+            backdrop-filter: blur(6px);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            box-shadow: 0 0 0 3px rgba(96,165,250,0.25);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-light) 0%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 700;
+            color: white;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 540px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 50%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 16px rgba(59,130,246,0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(59,130,246,0.45);
+        }
+
+        .btn-outline {
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.9);
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(6px);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        /* SECTIONS */
+        section { padding: 100px 24px; }
+        .wrap { max-width: 1120px; margin: 0 auto; }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 22px;
+            height: 2px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+
+        .section-sub {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            max-width: 580px;
+            line-height: 1.7;
+        }
+
+        /* ABOUT */
+        .about { background: var(--bg-alt); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            margin-top: 48px;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            font-size: 1.02rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 40px;
+            margin-top: 32px;
+        }
+
+        .stat h4 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        .stat span {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-weight: 500;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .highlight-card {
+            padding: 24px;
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .highlight-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(59,130,246,0.14);
+        }
+
+        .highlight-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(59,130,246,0.08);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .highlight-icon svg { width: 20px; height: 20px; }
+
+        .highlight-card h4 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+
+        .highlight-card p {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* SERVICES */
+        .services-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .services-header .section-sub {
+            margin: 0 auto;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            transition: all 0.3s;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(59,130,246,0.16);
+        }
+
+        .service-card:hover::before { transform: scaleX(1); }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.08) rotate(-4deg);
+        }
+
+        .service-icon { transition: transform 0.3s; }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent) 0%, #2563eb 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 16px rgba(59,130,246,0.25);
+        }
+
+        .service-icon svg { width: 24px; height: 24px; }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .service-card > p {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-list li {
+            font-size: 0.84rem;
+            color: var(--text-light);
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .service-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        /* CONTACT */
+        .contact-section {
+            background: var(--bg-alt);
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+            margin-top: 48px;
+        }
+
+        .contact-text p {
+            color: var(--text-light);
+            font-size: 1.02rem;
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 20px rgba(59,130,246,0.1);
+        }
+
+        .contact-card-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(59,130,246,0.08);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .contact-card-icon svg { width: 20px; height: 20px; }
+
+        .contact-card h4 {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 2px;
+        }
+
+        .contact-card p,
+        .contact-card a {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .contact-card a:hover { color: var(--accent); }
+
+        .contact-form-box {
+            padding: 36px;
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 48px rgba(12,29,54,0.06);
+        }
+
+        .contact-form-box h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text);
+            transition: border-color 0.2s;
+            background: var(--bg-alt);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 100px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 50%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 4px 14px rgba(59,130,246,0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(59,130,246,0.4);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
+            color: rgba(255,255,255,0.6);
+            padding: 52px 24px 36px;
+            border-top: 1px solid rgba(59,130,246,0.2);
+        }
+
+        .footer-content {
+            max-width: 1120px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        footer p { font-size: 0.82rem; }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .about-grid,
+            .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+
+            .service-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            section { padding: 72px 20px; }
+
+            nav ul { display: none; }
+            nav ul.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 16px 24px;
+                gap: 12px;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            }
+            nav ul.open a { color: var(--text) !important; }
+            .mobile-toggle { display: block; }
+
+            .service-grid { grid-template-columns: 1fr; }
+
+            .form-row { grid-template-columns: 1fr; }
+
+            .stat-row { gap: 24px; }
+            .about-highlights { grid-template-columns: 1fr; }
+        }
+
+        /* ANIMATIONS */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="nav">
+        <div class="wrap">
+            <div class="logo"><img src="tarang-logo-header.svg" alt="Tarang Consulting Services"></div>
+            <button class="mobile-toggle" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1><span class="text-gradient">Consulting Services</span></h1>
+            <p>A consulting firm delivering technology, spatial data, healthcare, and design coordination services with regulatory discipline and operational excellence.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Our Services &#8594;</a>
+                <a href="#contact" class="btn btn-outline">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="wrap">
+            <div class="section-label">About Us</div>
+            <div class="section-title">Built for Compliance,<br>Designed for Scale</div>
+            <div class="about-grid">
+                <div class="about-text fade-up">
+                    <p>Tarang Consulting Services is a professional services company delivering scalable, compliant, and cost-efficient solutions across technology, spatial data, healthcare, and design coordination.</p>
+                    <p>We combine deep local expertise with a remote-first delivery model to support complex projects with regulatory discipline and operational excellence, maintaining the highest standards of quality for every client.</p>
+                    <div class="stat-row">
+                        <div class="stat">
+                            <h4>5+</h4>
+                            <span>Service Verticals</span>
+                        </div>
+                        <div class="stat">
+                            <h4>100%</h4>
+                            <span>Compliant Model</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-highlights fade-up">
+                    <div class="highlight-card">
+                        <div class="highlight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                        <h4>Dedicated Team</h4>
+                        <p>Consistent client management and execution from a dedicated delivery team.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path><rect x="9" y="3" width="6" height="4" rx="1" ry="1"></rect><polyline points="9 14 11 16 15 12"></polyline></svg></div>
+                        <h4>Audit-Ready</h4>
+                        <p>Documentation-driven compliance with clean, auditable financial records.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+                        <h4>Remote-First</h4>
+                        <p>Flexible engagement model designed for distributed teams and clients.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
+                        <h4>Scalable</h4>
+                        <p>Structured for growth without requiring structural changes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <div class="wrap">
+            <div class="services-header">
+                <div class="section-label">What We Do</div>
+                <div class="section-title">Our Services</div>
+                <p class="section-sub">Advisory, consulting, and execution-support across multiple technology and professional services verticals.</p>
+            </div>
+
+            <div class="service-grid">
+                <div class="service-card fade-up">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                    <h3>Information Technology</h3>
+                    <p>Comprehensive IT solutions to transform operations and drive digital innovation.</p>
+                    <ul class="service-list">
+                        <li>Custom software development</li>
+                        <li>IT consulting &amp; strategic planning</li>
+                        <li>System integration</li>
+                        <li>Cloud solutions &amp; migration</li>
+                        <li>Digital transformation</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-up">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+                    <h3>GIS &amp; Spatial Data</h3>
+                    <p>Advanced geographic information systems and spatial analysis for location intelligence.</p>
+                    <ul class="service-list">
+                        <li>GIS consulting &amp; analysis</li>
+                        <li>Spatial data visualization</li>
+                        <li>Custom GIS applications</li>
+                        <li>Geospatial data management</li>
+                        <li>Mapping &amp; cartography</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-up">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg></div>
+                    <h3>Design Coordination</h3>
+                    <p>Professional design support for architectural and engineering projects.</p>
+                    <ul class="service-list">
+                        <li>Architectural coordination</li>
+                        <li>CAD drafting &amp; 3D modeling</li>
+                        <li>BIM coordination</li>
+                        <li>Construction documents</li>
+                        <li>As-built documentation</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-up">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+                    <h3>Healthcare Services</h3>
+                    <p>Specialized back-office support for operational efficiency and revenue cycle management.</p>
+                    <ul class="service-list">
+                        <li>Medical coding &amp; billing</li>
+                        <li>Documentation management</li>
+                        <li>Revenue cycle optimization</li>
+                        <li>Claims processing</li>
+                        <li>Compliance &amp; QA</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-up">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+                    <h3>Business Consulting</h3>
+                    <p>Strategic advisory services to optimize operations and accelerate growth.</p>
+                    <ul class="service-list">
+                        <li>Business strategy &amp; planning</li>
+                        <li>Process optimization</li>
+                        <li>Project management</li>
+                        <li>Technology advisory</li>
+                        <li>Change management</li>
+                    </ul>
+                </div>
+
+                <div class="service-card fade-up">
+                    <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg></div>
+                    <h3>Delivery Management</h3>
+                    <p>End-to-end project governance and delivery coordination across engagements.</p>
+                    <ul class="service-list">
+                        <li>Client relationship management</li>
+                        <li>Project governance</li>
+                        <li>Stakeholder coordination</li>
+                        <li>Quality assurance</li>
+                        <li>Operational oversight</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+        <div class="wrap">
+            <div class="section-label">Get in Touch</div>
+            <div class="section-title">Let's Discuss Your Project</div>
+            <div class="contact-layout">
+                <div class="fade-up">
+                    <div class="contact-text">
+                        <p>Ready to explore how Tarang can support your business? Reach out and we'll connect with you to discuss your requirements, timelines, and how we can help.</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22 6 12 13 2 6"></polyline></svg></div>
+                        <div>
+                            <h4>Email</h4>
+                            <a href="mailto:info@tarangcs.us">info@tarangcs.us</a>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Fort Mill, SC</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                        <div>
+                            <h4>Response Time</h4>
+                            <p>We typically respond within 1 business day.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-box fade-up">
+                    <h3>Send a Message</h3>
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" required placeholder="Your name">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" required placeholder="you@company.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" name="subject" placeholder="How can we help?">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea name="message" required placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message &#8594;</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Tarang Consulting Services LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Close mobile menu on link click
+        document.querySelectorAll('nav a').forEach(a => {
+            a.addEventListener('click', () => {
+                document.querySelector('nav ul').classList.remove('open');
+            });
+        });
+
+        // Contact form handler
+        function handleSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = new FormData(form);
+            const subject = encodeURIComponent(data.get('subject') || 'Project Inquiry');
+            const body = encodeURIComponent(
+                `Name: ${data.get('name')}\nEmail: ${data.get('email')}\n\n${data.get('message')}`
+            );
+            window.location.href = `mailto:info@tarangcs.us?subject=${subject}&body=${body}`;
+        }
+    </script>
+
+</body>
+</html>
